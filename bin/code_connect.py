@@ -68,7 +68,8 @@ def get_code_binary() -> Path:
 
     # Every entry in ~/.vscode-server/bin corresponds to a commit id
     # Pick the most recent one
-    code_repos = sort_by_access_timestamp(Path.home().glob(".vscode-server/bin/*"))
+    # code_repos = sort_by_access_timestamp(Path.home().glob(".vscode-server/bin/*"))
+    code_repos = sort_by_access_timestamp(Path.home().glob(".vscode-server/cli/servers/Stable-*"))
     if len(code_repos) == 0:
         fail(
             "No installation of VS Code Server detected!",
@@ -78,7 +79,8 @@ def get_code_binary() -> Path:
         )
 
     _, code_repo = code_repos[0]
-    return code_repo / "bin" / "remote-cli" / "code"
+    # return code_repo / "bin" / "remote-cli" / "code"
+    return code_repo / "server" / "bin" / "remote-cli" / "code"
 
 
 def get_ipc_socket(max_idle_time: int = DEFAULT_MAX_IDLE_TIME) -> Path:
